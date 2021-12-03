@@ -1,14 +1,23 @@
 package com.kobus.aoc;
 
 import java.io.IOException;
+import java.util.Objects;
 
+/**
+ * Advent of Code 2021 Solutions
+ * Warmup Day 1
+ *
+ * @author Kobus Pretorius
+ */
 public class DayWarmup1 extends AoCRunnable {
 
     public static void main(String[] args) throws IOException {
-        (new AoC()).run(new DayWarmup1(),
-                "warmup1",
-                2,
-                false);
+        new DayWarmup2("warmup1").run(true);
+        new DayWarmup2("warmup1").run(false);
+    }
+
+    public DayWarmup1(String dayNumber) {
+        super(dayNumber);
     }
 
     @Override
@@ -17,7 +26,7 @@ public class DayWarmup1 extends AoCRunnable {
         parseInputAsInt();
         for (var num1 : inputAsInt) {
             for (var num2 : inputAsInt) {
-                if (num1 != num2 && (num1 + num2 == 2020)) {
+                if (!Objects.equals(num1, num2) && (num1 + num2 == 2020)) {
                     answer = num1 * num2;
                 }
             }
@@ -32,7 +41,7 @@ public class DayWarmup1 extends AoCRunnable {
         for (var num1 : inputAsInt) {
             for (var num2 : inputAsInt) {
                 for (var num3 : inputAsInt) {
-                    if (num1 != num2 && num2 != num3 && num3 != num1 && (num1 + num2 + num3 == 2020)) {
+                    if (!Objects.equals(num1, num2) && !Objects.equals(num2, num3) && !Objects.equals(num3, num1) && (num1 + num2 + num3 == 2020)) {
                         answer = num1 * num2 * num3;
                     }
                 }

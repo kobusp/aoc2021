@@ -1,124 +1,70 @@
 package com.kobus.aoc;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * Advent of Code 2021 Solutions
+ * Day 3
+ *
+ * @author Kobus Pretorius
+ */
 public class Day3 extends AoCRunnable {
 
     public static void main(String[] args) throws IOException {
-        (new AoC()).run(new Day3(),
-                "3",
-                true);
+        new Day3("3").run(true);
+        new Day3("3").run(false);
+    }
 
-        (new AoC()).run(new Day3(),
-                "3",
-                false);
+    public Day3(String dayNumber) {
+        super(dayNumber);
     }
 
     @Override
     public String part1() {
-        int answer = 0;
-
-        int gamma = 0;
-        int epsilon = 0;
-
-        String gammaStr = "";
-        String epsilonStr = "";
+        StringBuilder gammaStr = new StringBuilder();
 
         int length = input.get(0).length();
 
         for (int i = 0; i < length; i++) {
-            int num0 = 0;
-            int num1 = 0;
-            for (var line : input) {
-                if (line.charAt(i) == '0') {
-                    num0++;
-                } else {
-                    num1++;
-                }
-            }
-            if (num0 > num1) {
-                gammaStr = gammaStr + "0";
-                epsilonStr = epsilonStr + "1";
-            } else {
-                gammaStr = gammaStr + "1";
-                epsilonStr = epsilonStr + "0";
-            }
+            int finalI = i;
+            int num0 = input.stream().mapToInt(l -> l.charAt(finalI) == '0' ? 1 : 0).sum();
+            int num1 = input.size() - num0;
+
+            gammaStr.append(num0 > num1 ? "0" : "1");
         }
 
-        gamma = Integer.parseInt(gammaStr, 2);
-        epsilon = Integer.parseInt(epsilonStr, 2);
+        int gamma = parseBinaryStr(gammaStr.toString());
+        int mask = (1 << length) - 1;
+        int epsilon = ~gamma & mask; // Epsilon is the bitwise NOT of gamma
 
-        answer = gamma * epsilon;
-
-        return "" + answer;
+        return "" + gamma * epsilon;
     }
 
     @Override
     public String part2() {
-        int answer = 0;
+        int oxygen = parseBinaryStr(findCommon(input, 0, true));
+        int co2 = parseBinaryStr(findCommon(input, 0, false));
 
-        String oxygenRating = findMostCommon(input, 0);
-        String co2Rating = findLeastCommon(input, 0);
-
-        int oxygen = Integer.parseInt(oxygenRating, 2);
-        int co2 = Integer.parseInt(co2Rating, 2);
-
-        answer = oxygen * co2;
-
-        return "" + answer;
+        return "" + oxygen * co2;
     }
 
-    private String findMostCommon(List<String> input, int i) {
+    // Recursive method until only one line of input remains
+    private String findCommon(List<String> input, final int i, boolean mostCommon) {
         if (input.size() == 1) {
             return input.get(0);
         } else {
-            var filtered = new ArrayList<String>();
-            int num0 = 0;
-            int num1 = 0;
-            for (var line : input) {
-                if (line.charAt(i) == '0') {
-                    num0++;
-                } else {
-                    num1++;
-                }
-            }
+            int num0 = input.stream().mapToInt(l -> l.charAt(i) == '0' ? 1 : 0).sum();
+            int num1 = input.size() - num0;
 
-            var mostCommon = num0 > num1 ? "0" : "1";
-            for (var line : input) {
-                if (line.substring(i, i + 1).equals(mostCommon)) {
-                    filtered.add(line);
-                }
-            }
+            var matchChar = mostCommon ? num0 > num1 ? "0" : "1" : num0 <= num1 ? "0" : "1";
 
-            return findMostCommon(filtered, i + 1);
-        }
-    }
+            var filtered = input.stream()
+                    .filter(l -> l.substring(i, i + 1).equals(matchChar))
+                    .collect(Collectors.toList());
 
-    private String findLeastCommon(List<String> input, int i) {
-        if (input.size() == 1) {
-            return input.get(0);
-        } else {
-            var filtered = new ArrayList<String>();
-            int num0 = 0;
-            int num1 = 0;
-            for (var line : input) {
-                if (line.charAt(i) == '0') {
-                    num0++;
-                } else {
-                    num1++;
-                }
-            }
-
-            var leastCommon = num0 <= num1 ? "0" : "1";
-            for (var line : input) {
-                if (line.substring(i, i + 1).equals(leastCommon)) {
-                    filtered.add(line);
-                }
-            }
-
-            return findLeastCommon(filtered, i + 1);
+            return findCommon(filtered, i + 1, mostCommon);
         }
     }
 }

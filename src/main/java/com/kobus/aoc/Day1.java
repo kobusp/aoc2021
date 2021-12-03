@@ -2,12 +2,21 @@ package com.kobus.aoc;
 
 import java.io.IOException;
 
+/**
+ * Advent of Code 2021 Solutions
+ * Day 1
+ *
+ * @author Kobus Pretorius
+ */
 public class Day1 extends AoCRunnable {
 
     public static void main(String[] args) throws IOException {
-        (new AoC()).run(new Day1(),
-                "1",
-                false);
+        new Day1("1").run(true);
+        new Day1("1").run(false);
+    }
+
+    public Day1(String dayNumber) {
+        super(dayNumber);
     }
 
     @Override
@@ -16,10 +25,8 @@ public class Day1 extends AoCRunnable {
         int prev = -1;
         parseInputAsInt();
         for (var num1 : inputAsInt) {
-            if (prev > -1) {
-                if (num1 > prev) {
-                    answer++;
-                }
+            if (prev > -1 && num1 > prev) {
+                answer++;
             }
             prev = num1;
         }

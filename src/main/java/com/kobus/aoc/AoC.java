@@ -1,51 +1,28 @@
 package com.kobus.aoc;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.Duration;
-import java.time.Instant;
+import java.util.ArrayList;
 
+/**
+ * Advent of Code 2021 Solutions
+ * Run all solutions with the proper input excluding test runs.
+ *
+ * @author Kobus Pretorius
+ */
 public class AoC {
 
-    public AoC() {
+    public static void main(String[] args) throws IOException {
+        var allDays = new ArrayList<AoCRunnable>();
+        allDays.add(new Day1("1"));
+        allDays.add(new Day2("2"));
+        allDays.add(new Day3("3"));
+        allDays.add(new Day4("4"));
 
-    }
-
-    /**
-     * Run part 1 and part 2
-     *
-     * @param runnable
-     * @param day
-     * @param testMode
-     * @throws IOException
-     */
-    public void run(AoCRunnable runnable, String day, boolean testMode) throws IOException {
-        print("=== Day " + day + " ====");
-        run(runnable, day, 1, testMode);
-        run(runnable, day, 2, testMode);
-    }
-
-    public void run(AoCRunnable runnable, String day, int partNumber, boolean testMode) throws IOException {
-        print("--- Part " + partNumber + " ---");
-
-        String answer;
-
-        runnable.setInput(Files.readAllLines(Path.of("src/main/resources/day" + day + (testMode ? "-test" : "") + ".txt")));
-        Instant start = Instant.now();
-        if (1 == partNumber) {
-            answer = runnable.part1();
-        } else {
-            answer = runnable.part2();
+        for (var day : allDays) {
+            day.run(false);
         }
-        Instant end = Instant.now();
-
-        print("Answer = " + answer);
-        print("Execution time part " + partNumber + ": " + Duration.between(start, end).toMillis() + "ms");
     }
 
-    public static void print(String s) {
-        System.out.println(s);
+    public AoC() {
     }
-
 }

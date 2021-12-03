@@ -1,19 +1,22 @@
 package com.kobus.aoc;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * Advent of Code 2021 Solutions
+ * Day 4
+ *
+ * @author Kobus Pretorius
+ */
 public class Day4 extends AoCRunnable {
 
     public static void main(String[] args) throws IOException {
-        (new AoC()).run(new Day4(),
-                "4",
-                true);
+        new Day4("4").run(true);
+        new Day4("4").run(false);
+    }
 
-        (new AoC()).run(new Day4(),
-                "4",
-                false);
+    public Day4(String dayNumber) {
+        super(dayNumber);
     }
 
     @Override

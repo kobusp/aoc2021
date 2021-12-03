@@ -2,19 +2,27 @@ package com.kobus.aoc;
 
 import java.io.IOException;
 
+/**
+ * Advent of Code 2021 Solutions
+ * Day 2
+ *
+ * @author Kobus Pretorius
+ */
 public class Day2 extends AoCRunnable {
 
     public static void main(String[] args) throws IOException {
-        (new AoC()).run(new Day2(),
-                "2",
-                false);
+        new Day2("2").run(true);
+        new Day2("2").run(false);
+    }
+
+    public Day2(String dayNumber) {
+        super(dayNumber);
     }
 
     @Override
     public String part1() {
         int pos = 0;
         int depth = 0;
-        int answer;
 
         var parsedInput = parse(String.class, Integer.class);
 
@@ -32,9 +40,7 @@ public class Day2 extends AoCRunnable {
             }
         }
 
-        answer = pos * depth;
-
-        return "" + answer;
+        return "" + pos * depth;
     }
 
     @Override
@@ -42,7 +48,6 @@ public class Day2 extends AoCRunnable {
         int pos = 0;
         int depth = 0;
         int aim = 0;
-        int answer;
 
         var parsedInput = parse(String.class, Integer.class);
 
@@ -52,17 +57,13 @@ public class Day2 extends AoCRunnable {
             if (instr.equals("forward")) {
                 pos += intVal;
                 depth += (aim * intVal);
-            }
-            if (instr.equals("down")) {
+            } else if (instr.equals("down")) {
                 aim += intVal;
-            }
-            if (instr.equals("up")) {
+            } else {
                 aim -= intVal;
             }
         }
 
-        answer = pos * depth;
-
-        return "" + answer;
+        return "" + pos * depth;
     }
 }

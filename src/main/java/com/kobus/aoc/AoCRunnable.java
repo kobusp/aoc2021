@@ -1,25 +1,73 @@
 package com.kobus.aoc;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AoCRunnable {
+/**
+ * Advent of Code 2021 Solutions
+ * Runnable class extended by each day's solution.
+ *
+ * @author Kobus Pretorius
+ */
+public abstract class AoCRunnable {
 
     List<String> input;
     List<Integer> inputAsInt = null;
+    String dayNumber;
 
+    public AoCRunnable(String dayNumber) {
+        this.dayNumber = dayNumber;
+    }
 
     String part1() {
         return "";
     }
 
-
     String part2() {
         return "";
     }
+
+    /**
+     * Run part 1 and part 2
+     *
+     * @param testMode the test mode
+     * @throws IOException the io exception
+     */
+    public void run(boolean testMode) throws IOException {
+        println("============= Day " + dayNumber + (testMode ? " [Test Mode] " : " ============") + "====");
+        setInput(Files.readAllLines(Path.of("src/main/resources/day" + dayNumber + (testMode ? "-test" : "") + ".txt")));
+        run(1);
+        run(2);
+    }
+
+    /**
+     * Run.
+     *
+     * @param partNumber the part number, 1 or 2
+     */
+    public void run(int partNumber) {
+        String answer;
+
+        Instant start = Instant.now();
+        if (1 == partNumber) {
+            answer = part1();
+        } else {
+            answer = part2();
+        }
+        Instant end = Instant.now();
+        String duration = String.format("%.3f", Duration.between(start, end).toNanos() / 1000000.0) + "ms";
+
+        println("#" + partNumber + ": " + String.format("%12s\t\t\t%8s", answer, duration));
+    }
+
 
     public void parseInputAsInt() {
         if (inputAsInt == null) {
@@ -64,6 +112,10 @@ public class AoCRunnable {
             parsedInput.add(parsedLine);
         }
         return parsedInput;
+    }
+
+    public int parseBinaryStr(String binaryString) {
+        return Integer.parseInt(binaryString, 2);
     }
 
     public List<Integer> splitAndParseToInt(String ticket, String delim) {

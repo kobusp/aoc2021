@@ -5,13 +5,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+/**
+ * Advent of Code 2021 Solutions
+ * Warmup Day 2
+ *
+ * @author Kobus Pretorius
+ */
 public class DayWarmup2 extends AoCRunnable {
 
     public static void main(String[] args) throws IOException {
-        (new AoC()).run(new DayWarmup2(),
-                "warmup2",
-                2,
-                false);
+        new DayWarmup2("warmup2").run(true);
+        new DayWarmup2("warmup2").run(false);
+    }
+
+    public DayWarmup2(String dayNumber) {
+        super(dayNumber);
     }
 
     @Override
@@ -23,7 +31,7 @@ public class DayWarmup2 extends AoCRunnable {
         for (String line : input) {
             if (line.isEmpty()) {
                 groupAnswers.add(yesAnswers.size());
-                yesAnswers = new HashSet<String>();
+                yesAnswers = new HashSet<>();
             } else {
                 for (char c : line.toCharArray()) {
                     yesAnswers.add(String.valueOf(c));
@@ -54,7 +62,7 @@ public class DayWarmup2 extends AoCRunnable {
                 }
                 groupAnswers.add(yesInAll);
 
-                yesAnswers = new HashMap<String, Integer>();
+                yesAnswers = new HashMap<>();
                 numInGroup = 0;
             } else {
                 for (char c : line.toCharArray()) {

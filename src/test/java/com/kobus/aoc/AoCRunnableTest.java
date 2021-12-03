@@ -13,7 +13,12 @@ public class AoCRunnableTest {
 
     @Test
     public void parse_should_parse_correctly() {
-        runnable = new AoCRunnable();
+        runnable = new AoCRunnable("") {
+            @Override
+            String part1() {
+                return super.part1();
+            }
+        };
         var input = List.of("up 1", "down 2", "left 3", "right 4");
         runnable.setInput(input);
         runnable.println("number of lines = " + input.size());
