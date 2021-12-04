@@ -17,6 +17,7 @@ public class AoC {
         allDays.add(new Day2("2"));
         allDays.add(new Day3("3"));
         allDays.add(new Day4("4"));
+        allDays.add(new Day5("5"));
 
         for (var day : allDays) {
             day.run(false);

@@ -22,6 +22,7 @@ public abstract class AoCRunnable {
     List<String> input;
     List<Integer> inputAsInt = null;
     String dayNumber;
+    boolean debugging = false;
 
     public AoCRunnable(String dayNumber) {
         this.dayNumber = dayNumber;
@@ -42,7 +43,7 @@ public abstract class AoCRunnable {
      * @throws IOException the io exception
      */
     public void run(boolean testMode) throws IOException {
-        println("============= Day " + dayNumber + (testMode ? " [Test Mode] " : " ============") + "====");
+        println("============= Day " + dayNumber + (testMode ? " [Test Mode] " : " ============") + "====", true);
         setInput(Files.readAllLines(Path.of("src/main/resources/day" + dayNumber + (testMode ? "-test" : "") + ".txt")));
         run(1);
         run(2);
@@ -65,7 +66,13 @@ public abstract class AoCRunnable {
         Instant end = Instant.now();
         String duration = String.format("%.3f", Duration.between(start, end).toNanos() / 1000000.0) + "ms";
 
-        println("#" + partNumber + ": " + String.format("%12s\t\t\t%8s", answer, duration));
+        println("#" + partNumber + ": " + String.format("%12s\t\t\t%8s", answer, duration), true);
+    }
+
+    private void println(String s, boolean force) {
+        if (force) {
+            System.out.println(s);
+        }
     }
 
 
@@ -88,11 +95,15 @@ public abstract class AoCRunnable {
     }
 
     public void print(String s) {
-        System.out.print(s);
+        if (debugging) {
+            System.out.print(s);
+        }
     }
 
     public void println(String s) {
-        System.out.println(s);
+        if (debugging) {
+            System.out.println(s);
+        }
     }
 
     public List<List<Object>> parse(Class... types) {
