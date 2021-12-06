@@ -43,10 +43,20 @@ public abstract class AoCRunnable {
      * @throws IOException the io exception
      */
     public void run(boolean testMode) throws IOException {
-        println("============= Day " + dayNumber + (testMode ? " [Test Mode] " : " ============") + "====", true);
+        run(testMode, 1);
+    }
+
+    /**
+     * Run part 1 and part 2
+     *
+     * @param testMode the test mode
+     * @throws IOException the io exception
+     */
+    public void run(boolean testMode, int numExecutions) throws IOException {
+        println("------------------------ Day " + dayNumber + (testMode ? " [Test Mode] " : " ------------") + "-----------------", true);
         setInput(Files.readAllLines(Path.of("src/main/resources/day" + dayNumber + (testMode ? "-test" : "") + ".txt")));
-        run(1);
-        run(2);
+        run(1, numExecutions);
+        run(2, numExecutions);
     }
 
     /**
@@ -54,19 +64,25 @@ public abstract class AoCRunnable {
      *
      * @param partNumber the part number, 1 or 2
      */
-    public void run(int partNumber) {
-        String answer;
+    public void run(int partNumber, int numExecutions) {
+        String answer = "";
+
+        long worstExecution = 0;
 
         Instant start = Instant.now();
-        if (1 == partNumber) {
-            answer = part1();
-        } else {
-            answer = part2();
+        for (int i = 0; i < numExecutions; i++) {
+            Instant _start = Instant.now();
+            if (1 == partNumber) {
+                answer = part1();
+            } else {
+                answer = part2();
+            }
+            worstExecution = Math.max(worstExecution, Duration.between(_start, Instant.now()).toNanos());
         }
-        Instant end = Instant.now();
-        String duration = String.format("%.3f", Duration.between(start, end).toNanos() / 1000000.0) + "ms";
+        String duration = String.format("%.3f", (Duration.between(start, Instant.now()).toNanos() / 1000000.0) / numExecutions) + "ms";
+        String worstDuration = String.format("%.3f", (worstExecution / 1000000.0)) + "ms";
 
-        println("#" + partNumber + ": " + String.format("%12s\t\t\t%8s", answer, duration), true);
+        println("#" + partNumber + ": " + String.format("%16s %19s %19s", answer, duration, "(" + worstDuration + ")"), true);
     }
 
     private void println(String s, boolean force) {

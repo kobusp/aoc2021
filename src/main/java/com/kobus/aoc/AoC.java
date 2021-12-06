@@ -11,7 +11,11 @@ import java.util.ArrayList;
  */
 public class AoC {
 
+    public static final int NUM_EXECUTIONS = 1000;
+
     public static void main(String[] args) throws IOException {
+        System.out.println("===================== AoC 2021 ~ Batch Execution ===========");
+        System.out.println("Part          Answer   Ave. of " + NUM_EXECUTIONS + " Runs\t\t\t (Worst)");
         var allDays = new ArrayList<AoCRunnable>();
         allDays.add(new Day1("1"));
         allDays.add(new Day2("2"));
@@ -19,9 +23,10 @@ public class AoC {
         allDays.add(new Day4("4"));
         allDays.add(new Day5("5"));
         allDays.add(new Day6("6"));
+        allDays.add(new Day7("7"));
 
         for (var day : allDays) {
-            day.run(false);
+            day.run(false, NUM_EXECUTIONS);
         }
     }
 
