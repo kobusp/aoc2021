@@ -53,7 +53,11 @@ public abstract class AoCRunnable {
      * @throws IOException the io exception
      */
     public void run(boolean testMode, int numExecutions) throws IOException {
-        println("------------------------ Day " + dayNumber + (testMode ? " [Test Mode] " : " ------------") + "-----------------", true);
+        if (numExecutions == 1) {
+            println("-------------- Day " + dayNumber + (testMode ? " [Test Mode] " : " ------------") + "------------", true);
+        } else {
+            println("╟──────────────────────────────────────────────────────────────────╢", true);
+        }
         setInput(Files.readAllLines(Path.of("src/main/resources/day" + dayNumber + (testMode ? "-test" : "") + ".txt")));
         run(1, numExecutions);
         run(2, numExecutions);
@@ -64,7 +68,7 @@ public abstract class AoCRunnable {
      *
      * @param partNumber the part number, 1 or 2
      */
-    public void run(int partNumber, int numExecutions) {
+    private void run(int partNumber, int numExecutions) {
         String answer = "";
 
         long worstExecution = 0;
@@ -82,7 +86,11 @@ public abstract class AoCRunnable {
         String duration = String.format("%.3f", (Duration.between(start, Instant.now()).toNanos() / 1000000.0) / numExecutions) + "ms";
         String worstDuration = String.format("%.3f", (worstExecution / 1000000.0)) + "ms";
 
-        println("#" + partNumber + ": " + String.format("%16s %19s %19s", answer, duration, "(" + worstDuration + ")"), true);
+        if (numExecutions == 1) {
+            println("#" + partNumber + ": " + String.format("%16s %24s", answer, duration), true);
+        } else {
+            println("║ " + String.format("%3s", dayNumber) + "  " + String.format("%4s", "#" + partNumber) + " " + String.format("%16s %19s %19s", answer, duration, "(" + worstDuration + ") ║"), true);
+        }
     }
 
     private void println(String s, boolean force) {

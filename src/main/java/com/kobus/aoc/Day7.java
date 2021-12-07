@@ -20,6 +20,12 @@ public class Day7 extends AoCRunnable {
         new Day7("7").run(false);
     }
 
+    public List<Integer> crabs = new ArrayList<>();
+    public Supplier<IntStream> crabSupplier = null;
+    public int min = Integer.MAX_VALUE;
+    public int max = 0;
+
+
     public Day7(String dayNumber) {
         super(dayNumber);
         debugging = true;
@@ -27,10 +33,9 @@ public class Day7 extends AoCRunnable {
 
     @Override
     public String part1() {
-        List<Integer> crabs = new ArrayList<>(Arrays.stream(input.get(0).split(",")).mapToInt(Integer::parseInt).boxed().toList());
+        crabs = new ArrayList<>(Arrays.stream(input.get(0).split(",")).mapToInt(Integer::parseInt).boxed().toList());
+        crabSupplier = () -> crabs.stream().mapToInt(Integer::intValue);
 
-        int min = Integer.MAX_VALUE;
-        int max = 0;
         for (Integer i : crabs) {
             if (min > i) {
                 min = i;
@@ -39,15 +44,18 @@ public class Day7 extends AoCRunnable {
                 max = i;
             }
         }
-        Supplier<IntStream> sup = () -> crabs.stream().mapToInt(Integer::intValue);
 
         int minFuelCost = -1;
         for (int i = min; i <= max; i++) {
 
             int finalI = i;
-            int fuelCost = sup.get().map(c -> Math.abs(finalI - c)).sum();
+            int fuelCost = crabSupplier.get().map(c -> Math.abs(finalI - c)).sum();
             if (minFuelCost == -1 || fuelCost < minFuelCost) {
                 minFuelCost = fuelCost;
+            }
+
+            if (minFuelCost > 0 && fuelCost > minFuelCost) {
+                break;
             }
         }
 
@@ -56,42 +64,25 @@ public class Day7 extends AoCRunnable {
 
     @Override
     public String part2() {
-        List<Integer> crabs = new ArrayList<>(Arrays.stream(input.get(0).split(",")).mapToInt(Integer::parseInt).boxed().toList());
-
-        int min = Integer.MAX_VALUE;
-        int max = 0;
-        for (Integer i : crabs) {
-            if (min > i) {
-                min = i;
-            }
-            if (max < i) {
-                max = i;
-            }
-        }
-        List<Integer> cachedDistances = precalculateDistance(max);
-        Supplier<IntStream> sup = () -> crabs.stream().mapToInt(Integer::intValue);
-
         int minFuelCost = -1;
         for (int i = min; i <= max; i++) {
 
             int finalI = i;
-            int fuelCost = sup.get().map(c -> cachedDistances.get(Math.abs(finalI - c))).sum();
+
+            int fuelCost = crabSupplier.get().map(c -> gaussSum(Math.abs(finalI - c))).sum();
             if (minFuelCost == -1 || fuelCost < minFuelCost) {
                 minFuelCost = fuelCost;
+            }
+
+            if (minFuelCost > 0 && fuelCost > minFuelCost) {
+                break;
             }
         }
 
         return "" + minFuelCost;
     }
 
-    public List<Integer> precalculateDistance(int max) {
-        var precalcDistances = new ArrayList<Integer>();
-        precalcDistances.add(0);
-        int sum = 0;
-        for (int n = 1; n <= max; n++) {
-            sum += n;
-            precalcDistances.add(sum);
-        }
-        return precalcDistances;
+    public int gaussSum(int n) {
+        return n * (n + 1) / 2;
     }
 }
