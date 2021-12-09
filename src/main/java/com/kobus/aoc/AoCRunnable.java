@@ -56,6 +56,7 @@ public abstract class AoCRunnable {
         if (numExecutions == 1) {
             println("-------------- Day " + dayNumber + (testMode ? " [Test Mode] " : " ------------") + "------------", true);
         } else {
+            debugging = false;
             println("╟──────────────────────────────────────────────────────────────────╢", true);
         }
         setInput(Files.readAllLines(Path.of("src/main/resources/day" + dayNumber + (testMode ? "-test" : "") + ".txt")));
