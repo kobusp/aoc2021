@@ -31,13 +31,13 @@ public class Day4 extends AoCRunnable {
         List<Board> boards = createBoards(input);
 
         for (var number : calledNumbers) {
-            for (var board : boards) {
-                board.callNumber(number);
-                if (board.hasWon()) {
-                    answer = board.sumOfRemainingNumbers() * number;
-                    break;
-                }
-            }
+
+            answer = boards.stream()
+                    .filter(board -> board.callNumber(number).hasWon())
+                    .findFirst()
+                    .map(board -> board.sumOfRemainingNumbers() * number)
+                    .orElse(0);
+
             if (answer > 0) {
                 break;
             }
@@ -107,10 +107,11 @@ public class Day4 extends AoCRunnable {
             }
         }
 
-        public void callNumber(Integer n) {
+        public Board callNumber(Integer n) {
             if (numbers.contains(n)) {
                 numbers.set(numbers.indexOf(n), -1);
             }
+            return this;
         }
 
         public void print() {

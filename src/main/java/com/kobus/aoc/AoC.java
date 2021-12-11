@@ -22,14 +22,13 @@ public class AoC {
         allDays.add(new Day2("2"));
         allDays.add(new Day3("3"));
         allDays.add(new Day4("4"));
-//        allDays.add(new Day5("5"));
-        allDays.add(new Day5b("5b"));
+        allDays.add(new Day5b("5b")); // Optimized
         allDays.add(new Day6("6"));
-//        allDays.add(new Day7("7"));
-        allDays.add(new Day7b("7b"));
+        allDays.add(new Day7b("7b")); // Optimized
         allDays.add(new Day8("8"));
         allDays.add(new Day9("9"));
         allDays.add(new Day10("10"));
+        allDays.add(new Day10("11"));
 
         for (var day : allDays) {
             day.run(false, NUM_EXECUTIONS);

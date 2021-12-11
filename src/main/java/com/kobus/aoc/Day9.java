@@ -23,6 +23,7 @@ public class Day9 extends AoCRunnable {
     private int[][] grid;
     private int sizeX;
     private int sizeY;
+    private List<Coord> directions = new ArrayList<Coord>();
 
     public Day9(String dayNumber) {
         super(dayNumber);
@@ -32,12 +33,17 @@ public class Day9 extends AoCRunnable {
     @Override
     public String part1() {
 
+        directions.add(new Coord(-1, 0));
+        directions.add(new Coord(1, 0));
+        directions.add(new Coord(0, -1));
+        directions.add(new Coord(0, 1));
+
         grid = parseInput();
 
         int riskLevel = 0;
         for (int y = 0; y < sizeY; y++) {
             for (int x = 0; x < sizeX; x++) {
-                if (neighboursAreLarger(x, y)) {
+                if (allNeighboursAreLarger(x, y)) {
                     riskLevel += grid[y][x] + 1;
                 }
             }
@@ -90,7 +96,7 @@ public class Day9 extends AoCRunnable {
         return new Coord(x, y);
     }
 
-    private boolean neighboursAreLarger(int x, int y) {
+    private boolean allNeighboursAreLarger(int x, int y) {
         int v = grid[y][x];
         var neighbours = new ArrayList<Integer>();
         if (x > 0) {
@@ -135,9 +141,5 @@ public class Day9 extends AoCRunnable {
     }
 
     public record Coord(int x, int y) {
-
-        public Coord(String coords) {
-            this(Integer.parseInt(coords.split(",")[0]), Integer.parseInt(coords.split(",")[1]));
-        }
     }
 }

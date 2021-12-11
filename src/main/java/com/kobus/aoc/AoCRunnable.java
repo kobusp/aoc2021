@@ -179,4 +179,10 @@ public abstract class AoCRunnable {
         System.arraycopy(part2, 0, complete, part1.length, part2.length);
         return complete;
     }
+
+    public String sort(String s) {
+        char[] charArray = s.toCharArray();
+        Arrays.sort(charArray);
+        return new String(charArray);
+    }
 }

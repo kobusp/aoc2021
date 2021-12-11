@@ -102,12 +102,6 @@ public class Day8 extends AoCRunnable {
         return Arrays.stream(digits).filter(s -> s.length() == n).collect(Collectors.toList());
     }
 
-    private String sort(String s) {
-        char[] charArray = s.toCharArray();
-        Arrays.sort(charArray);
-        return new String(charArray);
-    }
-
     private String[] sort(String[] strings, boolean finalSort) {
         List<String> sorted = new ArrayList<>();
         for (var s : strings) {
