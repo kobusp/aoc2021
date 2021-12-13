@@ -5,14 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Advent of Code 2021 Solutions
- * Day 5 Optimized
+ * Day 5: Hydrothermal Venture ~ Optimized
  *
  * @author Kobus Pretorius
  */

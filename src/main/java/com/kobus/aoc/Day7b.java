@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 /**
  * Advent of Code 2021 Solutions
- * Day 7 Optimized
+ * Day 7: The Treachery of Whales ~ Optimized
  *
  * @author Kobus Pretorius
  */

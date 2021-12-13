@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 /**
  * Advent of Code 2021 Solutions
- * Day 3
+ * Day 3: Binary Diagnostic
  *
  * @author Kobus Pretorius
  */

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 /**
  * Advent of Code 2021 Solutions
- * Day 10
+ * Day 10: Syntax Scoring
  *
  * @author Kobus Pretorius
  */
@@ -25,7 +25,7 @@ public class Day10 extends AoCRunnable {
     private HashMap<String, Long> scores2 = new HashMap<>();
     private HashMap<String, String> closing = new HashMap<>();
     private HashMap<String, String> opening = new HashMap<>();
-    private List<String> validLines = new ArrayList<>();
+    private List<String> validLines;
 
     public Day10(String dayNumber) {
         super(dayNumber);
@@ -55,6 +55,7 @@ public class Day10 extends AoCRunnable {
 
     @Override
     public String part1() {
+        validLines = new ArrayList<>();
         int sum = 0;
         for (var line : input) {
             var score = getScore(line);

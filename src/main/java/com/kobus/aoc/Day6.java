@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Advent of Code 2021 Solutions
- * Day 6
+ * Day 6: Lanternfish
  *
  * @author Kobus Pretorius
  */

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 /**
  * Advent of Code 2021 Solutions
- * Day 8
+ * Day 8: Seven Segment Search
  *
  * @author Kobus Pretorius
  */

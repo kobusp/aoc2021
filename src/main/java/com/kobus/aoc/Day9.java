@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 /**
  * Advent of Code 2021 Solutions
- * Day 9
+ * Day 9: Smoke Basin
  *
  * @author Kobus Pretorius
  */

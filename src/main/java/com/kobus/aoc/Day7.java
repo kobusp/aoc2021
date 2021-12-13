@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 /**
  * Advent of Code 2021 Solutions
- * Day 7
+ * Day 7: The Treachery of Whales
  *
  * @author Kobus Pretorius
  */

@@ -1,8 +1,6 @@
 package com.kobus.aoc;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -11,7 +9,7 @@ import java.util.stream.Stream;
 
 /**
  * Advent of Code 2021 Solutions
- * Day 5
+ * Day 5: Hydrothermal Venture
  *
  * @author Kobus Pretorius
  */

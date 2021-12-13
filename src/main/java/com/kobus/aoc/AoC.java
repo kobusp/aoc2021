@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class AoC {
 
-    public static final int NUM_EXECUTIONS = 1000;
+    public static final int NUM_EXECUTIONS = 100;
 
     public static void main(String[] args) throws IOException {
         System.out.println("");
@@ -28,7 +28,9 @@ public class AoC {
         allDays.add(new Day8("8"));
         allDays.add(new Day9("9"));
         allDays.add(new Day10("10"));
-        allDays.add(new Day10("11"));
+        allDays.add(new Day11("11"));
+        allDays.add(new Day12("12"));
+        allDays.add(new Day13("13"));
 
         for (var day : allDays) {
             day.run(false, NUM_EXECUTIONS);

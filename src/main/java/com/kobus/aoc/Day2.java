@@ -4,7 +4,7 @@ import java.io.IOException;
 
 /**
  * Advent of Code 2021 Solutions
- * Day 2
+ * Day 2: Dive!
  *
  * @author Kobus Pretorius
  */

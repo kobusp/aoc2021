@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 /**
  * Advent of Code 2021 Solutions
- * Day 4
+ * Day 4: Giant Squid
  *
  * @author Kobus Pretorius
  */
