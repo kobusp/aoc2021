@@ -14,7 +14,7 @@ public class AoC {
     public static final int NUM_EXECUTIONS = 100;
 
     public static void main(String[] args) throws IOException {
-        System.out.println("");
+        System.out.println();
         System.out.println("╔═══════════════════ AoC 2021 ~ Batch Execution ═══════════════════╗");
         System.out.println("║ Day  Part           Answer" + String.format("%20s", "Ave. of " + NUM_EXECUTIONS + " Runs") + String.format("%18s", "(Worst)") + " ║");
         var allDays = new ArrayList<AoCRunnable>();
@@ -31,6 +31,10 @@ public class AoC {
         allDays.add(new Day11("11"));
         allDays.add(new Day12("12"));
         allDays.add(new Day13("13"));
+        allDays.add(new Day14("14"));
+        allDays.add(new Day15("15"));
+        allDays.add(new Day16("16"));
+        allDays.add(new Day17("17"));
 
         for (var day : allDays) {
             day.run(false, NUM_EXECUTIONS);

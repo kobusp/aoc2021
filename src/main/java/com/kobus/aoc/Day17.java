@@ -1,25 +1,21 @@
 package com.kobus.aoc;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Advent of Code 2021 Solutions
- * Day n
+ * Day 17
  *
  * @author Kobus Pretorius
  */
-public class DayTemplate extends AoCRunnable {
+public class Day17 extends AoCRunnable {
 
     public static void main(String[] args) throws IOException {
-        new DayTemplate("n").run(true);
-        new DayTemplate("n").run(false);
+        new Day17("17").run(true);
+        new Day17("17").run(false);
     }
 
-    public DayTemplate(String dayNumber) {
+    public Day17(String dayNumber) {
         super(dayNumber);
         debugging = true;
     }
