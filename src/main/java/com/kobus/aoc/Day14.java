@@ -181,10 +181,8 @@ public class Day14 extends AoCRunnable {
             String takeTwo = template.substring(i, i + 2);
             if (rules.containsKey(takeTwo)) {
                 newTemplate.append(takeTwo.charAt(0)).append(rules.get(takeTwo));
-//                println("  - " + takeTwo + " -> " + takeTwo.charAt(0) + rules.get(takeTwo) + takeTwo.charAt(1));
             } else {
                 newTemplate.append(takeTwo.charAt(0));
-//                println("  x " + takeTwo);
             }
         }
         newTemplate.append(template.substring(template.length() - 1));

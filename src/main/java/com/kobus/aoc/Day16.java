@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 /**
  * Advent of Code 2021 Solutions
- * Day 16
+ * Day 16: Packet Decoder
  *
  * @author Kobus Pretorius
  */
